@@ -129,7 +129,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="process.c" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="process_asm.asm">
