@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 extern double process(double*, int, double*);
 
@@ -23,6 +24,15 @@ static double* process_c(double* X, int size, double* Y) {
     }
 
     return Y;
+}
+
+bool compare_outputs(double* Y_c, double* Y_asm, int size) {
+    for (int i = 0; i < size - 6; i++) {
+        if (Y_c[i] != Y_asm[i]) {
+            return false;
+        }
+    }
+    return true;
 }
 
 int main() {
@@ -116,6 +126,17 @@ int main() {
         printf("%.lf", Y_asm[i]);
     }
     printf("\nASM kernel execution time: %.5f ms\n", elapsed);
+
+    // Check if C output and ASM output are exactly the same
+    bool outputs_match = compare_outputs(Y_c, Y_asm, size);
+    if (outputs_match) {
+        printf("\nCorrectness Check: PASS\n");
+        printf("C output and ASM output are exactly the same!");
+    }
+    else {
+        printf("\nCorrectness Check: FAIL\n");
+        printf("C output and ASM output are different!");
+    }
 
     // Free memory allocs
     free(X);
