@@ -140,9 +140,9 @@ int main() {
     }
     
     // Free memory allocs
-    // free(X);
-    // free(Y_c);
-    // free(Y_asm);
+    free(X);
+    free(Y_c);
+    free(Y_asm);
 
     return 0;
 }
