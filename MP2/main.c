@@ -10,21 +10,23 @@ extern void process(double*, int, double*);
 static double* process_c(double* X, int size, double* Y) {
     int start_index = 3;
     int end = size - 1;
-    int i;
     int counter = 0;
 
-    for (i = start_index; i <= end; i++) {
-        // Break loop if out of bounds
-        if (i - 3 < 0 || i + 3 >= size) {
-            break;
-        }
-        else {
-            Y[counter] = X[i - 3] + X[i - 2] + X[i - 1] + X[i] + X[i + 1] + X[i + 2] + X[i + 3];
-            counter++;
+    for (int i = start_index; i <= end; i++) {
+        if (i - 3 >= 0 && i + 3 < size) {
+            Y[counter++] = X[i - 3] + X[i - 2] + X[i - 1] + X[i] + X[i + 1] + X[i + 2] + X[i + 3];
         }
     }
 
     return Y;
+}
+
+static void print_array_10(double* arr, int size) {
+    int print_size = (size < 10) ? size : 10;
+    for (int i = 0; i < print_size; i++) {
+        printf("%.lf ", arr[i]);
+    }
+    printf("\n");
 }
 
 static bool compare_outputs(double* Y_c, double* Y_asm, int Y_size) {
@@ -36,38 +38,26 @@ static bool compare_outputs(double* Y_c, double* Y_asm, int Y_size) {
     return true;
 }
 
-void run_comparison(double* X, int vector_size) {
-    int Y_size = vector_size - 6;
-    double* Y_c = (double*)malloc(Y_size * sizeof(double));
-    double* Y_asm = (double*)malloc(Y_size * sizeof(double));
-
-    if (Y_c == NULL || Y_asm == NULL) {
-        printf("Error: Memory allocation failed for vector size %d\n", vector_size);
-        free(Y_c);
-        free(Y_asm);
-        return;
-    }
-
+static void run_comparison(double* X, int vector_size, double* Y_c, double* Y_asm, int Y_size) {
     process_c(X, vector_size, Y_c);
     process(X, vector_size, Y_asm);
 
     printf("-----Vector Size: %d-----\n", vector_size);
 
-    // Print first and last values of C program output
-    printf("Answer (C kernel): ");
-    printf("First value: %.lf, Last value: %.lf\n", Y_c[0], Y_c[Y_size - 1]);
+    // Print first 10 elements of vector Y
+    printf("First 10 elements of vector Y (C kernel): ");
+    print_array_10(Y_c, Y_size);
 
-    // Print first and last values of ASM program output
-    printf("Answer (ASM kernel): ");
-    printf("First value: %.lf, Last value: %.lf\n", Y_asm[0], Y_asm[Y_size - 1]);
+    // Print first 10 elements of vector Y
+    printf("First 10 elements of vector Y (ASM kernel): ");
+    print_array_10(Y_asm, Y_size);
 
     // Check if C output and ASM output are exactly the same
     bool outputs_match = compare_outputs(Y_c, Y_asm, Y_size);
     if (outputs_match) {
         printf("Correctness Check: PASS\n");
         printf("C output and ASM output are exactly the same!\n");
-    }
-    else {
+    } else {
         printf("Correctness Check: FAIL\n");
         printf("C output and ASM output are different!\n");
     }
@@ -94,48 +84,21 @@ void run_comparison(double* X, int vector_size) {
     double avg_time_c = total_time_c / 30.0;
     double avg_time_asm = total_time_asm / 30.0;
 
-    printf("Runtime Comparison:\n");
+    printf("Runtime Comparison (30 attempts):\n");
     printf("Average C Kernel Execution Time: %.5f ms\n", avg_time_c);
     printf("Average ASM Kernel Execution Time: %.5f ms\n", avg_time_asm);
 
     double speed_ratio = (avg_time_c / avg_time_asm) * 100.0;
-    printf("The assembly kernel is %.2f%% the speed of the C kernel\n\n", speed_ratio);
-
-    free(Y_c);
-    free(Y_asm);
+    printf("The assembly kernel is %.2f%% the speed of the C kernel.\n", speed_ratio);
 }
 
-int main() {
+static void run_custom_input() {
     int size = 0;
     char input[500];
-
-    int sizes[] = { (int)pow(2, 20), (int)pow(2, 24), (int)pow(2, 30) };
-    int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
-
-    for (int i = 0; i < num_sizes; i++) {
-        int vector_size = sizes[i];
-        double* X = (double*)malloc(vector_size * sizeof(double));
-        if (X == NULL) {
-            printf("Error: Memory allocation failed for vector size %d\n", vector_size);
-            continue;
-        }
-
-        // Fill the vector with counting numbers
-        for (int j = 0; j < vector_size; j++) {
-            X[j] = j + 1;
-        }
-
-        run_comparison(X, vector_size);
-        printf("\n\n");
-
-        free(X);
-    }
 
     // Get input
     printf("Enter comma-separated double values: ");
     fgets(input, sizeof(input), stdin);
-
-    // Remove trailing newline character
     input[strcspn(input, "\n")] = '\0';
 
     // Count the number of commas to determine the number of elements
@@ -147,11 +110,12 @@ int main() {
     }
 
     // Parse the input string and store values in the array
-    double* X = (double*)malloc(count * sizeof(double));
+    double* X = malloc(count * sizeof(double));
     if (X == NULL) {
-        printf("Error: Memory allocation failed");
-        return 1;
+        printf("Error: Memory allocation failed for vector X");
+        return;
     }
+
     char* token = NULL;
     char* context = NULL; // For strtok_s
     token = strtok_s(input, ",", &context);
@@ -159,70 +123,115 @@ int main() {
         X[size++] = atof(token);
         token = strtok_s(NULL, ",", &context);
     }
+
     if (size < 7) {
         printf("Array must be of length 7 or greater");
-        return 0;
+        return;
     }
 
-    // ---------
-    // C PROGRAM
-    // ---------
-
+    // Allocate memory for vector Y
     int Y_size = size - 6;
-    double* Y_c = (double*)malloc(Y_size * sizeof(double));
-    if (Y_c == NULL) {
-        printf("Error: Memory allocation failed");
+    double* Y_c = malloc(Y_size * sizeof(double));
+    double* Y_asm = malloc(Y_size * sizeof(double));
+
+    if (Y_c == NULL || Y_asm == NULL) {
+        printf("Error: Memory allocation failed for vector Y");
         free(X);
-        return 1;
+        free(Y_c);
+        free(Y_asm);
+        return;
     }
 
+    // Execute C program
     clock_t start_c = clock();
     process_c(X, size, Y_c);
     clock_t end_time_c = clock();
     double elapsed_c = (end_time_c - start_c) * 1000.0 / CLOCKS_PER_SEC;
 
-    // Print first and last values of C program output
-    printf("Answer (C kernel): ");
-    printf("First value: %.lf, Last value: %.lf\n", Y_c[0], Y_c[Y_size - 1]);
+    // Print first 10 elements of vector Y
+    printf("First 10 elements of vector Y (C kernel): ");
+    print_array_10(Y_c, Y_size);
     printf("C kernel execution time: %.5f ms\n\n", elapsed_c);
 
-    // -----------
-    // ASM PROGRAM
-    // -----------
-
-    double* Y_asm = (double*)malloc(Y_size * sizeof(double));
-    if (Y_asm == NULL) {
-        printf("Error: Memory allocation failed");
-        free(X);
-        free(Y_c);
-        return 1;
-    }
-
+    // Execute ASM program
     clock_t start = clock();
     process(X, size, Y_asm);
     clock_t end_time = clock();
     double elapsed = (end_time - start) * 1000.0 / CLOCKS_PER_SEC;
 
-    // Print first and last values of ASM program output
-    printf("Answer (ASM kernel): ");
-    printf("First value: %.lf, Last value: %.lf\n", Y_asm[0], Y_asm[Y_size - 1]);
+    // Print first 10 elements of vector Y
+    printf("First 10 elements of vector Y (ASM kernel): ");
+    print_array_10(Y_asm, Y_size);
     printf("ASM kernel execution time: %.5f ms\n", elapsed);
 
-    // Check if C output and ASM output are exactly the same
+    // Correctness Check
     bool outputs_match = compare_outputs(Y_c, Y_asm, Y_size);
     if (outputs_match) {
         printf("\nCorrectness Check: PASS\n");
         printf("C output and ASM output are exactly the same!");
-    }
-    else {
+    } else {
         printf("\nCorrectness Check: FAIL\n");
         printf("C output and ASM output are different!");
     }
 
-    // Free memory allocs
     free(X);
     free(Y_c);
     free(Y_asm);
+}
+
+int main() {
+    int choice;
+    printf("Choose what you want the program to do.\n");
+    printf("1. Run predefined comparisons\n");
+    printf("2. Enter custom input\n");
+    printf("Enter your choice (1 or 2): ");
+    if (scanf_s("%d", &choice) != 1) {
+        printf("Invalid input. Exiting the program.\n");
+        return 1;
+    }
+    (void)getchar();
+
+    if (choice == 1) {
+        printf("\n\n");
+        int sizes[] = { (int)pow(2, 20), (int)pow(2, 24), (int)pow(2, 30) };
+        int num_sizes = sizeof(sizes) / sizeof(sizes[0]);
+
+        for (int i = 0; i < num_sizes; i++) {
+            int vector_size = sizes[i];
+            int Y_size = vector_size - 6;
+            double* X = malloc(vector_size * sizeof(double));
+            double* Y_c = malloc(Y_size * sizeof(double));
+            double* Y_asm = malloc(Y_size * sizeof(double));
+
+            // Ensure memory allocation success
+            if (X == NULL || Y_c == NULL || Y_asm == NULL) {
+                printf("Error: Memory allocation failed for vector size %d\n", vector_size);
+                free(X);
+                free(Y_c);
+                free(Y_asm);
+                break;
+            }
+
+            // Fill the vector with counting numbers
+            for (int j = 0; j < vector_size; j++) {
+                X[j] = j + 1;
+            }
+
+            run_comparison(X, vector_size, Y_c, Y_asm, Y_size);
+            printf("\n\n");
+
+            free(X);
+            free(Y_c);
+            free(Y_asm);
+        }
+    }
+    else if (choice == 2) {
+        printf("\n");
+        run_custom_input();
+    }
+    else {
+        printf("Invalid choice. Exiting the program.\n");
+    }
 
     return 0;
 }
