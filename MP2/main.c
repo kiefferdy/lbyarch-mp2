@@ -4,7 +4,7 @@
 #include <time.h>
 #include <stdbool.h>
 
-extern double process(double*, int, double*);
+extern void process(double*, int, double*);
 
 static double* process_c(double* X, int size, double* Y) {
     int start_index = 3;
@@ -13,7 +13,7 @@ static double* process_c(double* X, int size, double* Y) {
     int counter = 0;
 
     for (i = start_index; i <= end; i++) {
-        // if greater or less than array break loop
+        // Break loop if out of bounds
         if (i - 3 < 0 || i + 3 >= size) {
             break;
         }
@@ -26,8 +26,8 @@ static double* process_c(double* X, int size, double* Y) {
     return Y;
 }
 
-bool compare_outputs(double* Y_c, double* Y_asm, int size) {
-    for (int i = 0; i < size - 6; i++) {
+static bool compare_outputs(double* Y_c, double* Y_asm, int Y_size) {
+    for (int i = 0; i < Y_size; i++) {
         if (Y_c[i] != Y_asm[i]) {
             return false;
         }
@@ -78,7 +78,8 @@ int main() {
 
     printf("Answer (C kernel): ");
 
-    double* Y_c = malloc(size * sizeof(double));
+    int Y_size = size - 6;
+    double* Y_c = malloc(Y_size * sizeof(double));
     if (Y_c == NULL) {
         printf("Error: Memory allocation failed");
         free(X);
@@ -91,7 +92,7 @@ int main() {
     double elapsed_c = (end_time_c - start_c) * 1000.0 / CLOCKS_PER_SEC;
 
     // Print results of C program
-    for (int i = 0; i < size - 6; i++) {
+    for (int i = 0; i < Y_size; i++) {
         if (i > 0) {
             printf(", ");
         }
@@ -105,7 +106,7 @@ int main() {
 
     printf("Answer (ASM kernel): ");
 
-    double* Y_asm = malloc(size * sizeof(double));
+    double* Y_asm = malloc(Y_size * sizeof(double));
     if (Y_asm == NULL) {
         printf("Error: Memory allocation failed");
         free(X);
@@ -119,7 +120,7 @@ int main() {
     double elapsed = (end_time - start) * 1000.0 / CLOCKS_PER_SEC;
 
     // Print results of ASM program
-    for (int i = 0; i < size - 6; i++) {
+    for (int i = 0; i < Y_size; i++) {
         if (i > 0) {
             printf(", ");
         }
@@ -128,7 +129,7 @@ int main() {
     printf("\nASM kernel execution time: %.5f ms\n", elapsed);
 
     // Check if C output and ASM output are exactly the same
-    bool outputs_match = compare_outputs(Y_c, Y_asm, size);
+    bool outputs_match = compare_outputs(Y_c, Y_asm, Y_size);
     if (outputs_match) {
         printf("\nCorrectness Check: PASS\n");
         printf("C output and ASM output are exactly the same!");
@@ -139,9 +140,9 @@ int main() {
     }
 
     // Free memory allocs
-    free(X);
-    free(Y_c);
-    free(Y_asm);
+    // free(X);
+    // free(Y_c);
+    // free(Y_asm);
 
     return 0;
 }
