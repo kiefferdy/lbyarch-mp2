@@ -1,31 +1,30 @@
-section .data
-    msg db "%.1lf",0
-    comma db ", ",0
-
 section .text
     extern printf
     bits 64
-    Default rel
+    default rel
     global process
 
 process:
     mov r15, rcx  ; Store the array pointer in r15
     mov r14, rdx  ; Store the array size in r14
-    
     mov rsi, 3    ; Start index at 3
+    xor rax, rax  ; Initialize counter to 0
 
-loop:    
+loop:
+    ; Ensure out of bounds elements is not accessed
     mov rbx, rsi
     sub rbx, 3
     cmp rbx, 0
     jl next_iteration
     
+    ; Exit the loop when end of array has been reached
     mov rbx, rsi
     add rbx, 3
     cmp rbx, r14
     jge end
     
-    xorps xmm0, xmm0  ; Initialize xmm0 to 0
+    ; Initialize xmm0 to 0
+    xorps xmm0, xmm0
     
     ; Perform calculations
     movsd xmm1, [r15 + (rsi - 3) * 8]  ; Load num[i - 3] to xmm1
@@ -43,23 +42,9 @@ loop:
     movsd xmm7, [r15 + (rsi + 3) * 8]  ; Load num[i + 3] to xmm7
     addsd xmm0, xmm7  ; xmm0 = xmm0 + xmm7
     
-    ; Print the result
-    sub rsp, 8*5
-    lea rcx, [msg]
-    movq rdx, xmm0
-    call printf
-    add rsp, 8*5
-    
-    ; Print comma and space if not the last iteration
-    mov rbx, rsi
-    add rbx, 4
-    cmp rbx, r14
-    jge end
-
-    sub rsp, 8*5
-    lea rcx, [comma]
-    call printf
-    add rsp, 8*5
+    ; Add sum to result array
+    movq [r8 + rax * 8], xmm0
+    inc rax
 
 next_iteration:
     inc rsi
