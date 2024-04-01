@@ -11,7 +11,7 @@ int main() {
     double asm_Ans = 0.0;
     int size = 0;
 
-    char input[500];  // Assume a maximum input length of 500 characters
+    char input[500];
     printf("Enter comma-separated double values: ");
     fgets(input, sizeof(input), stdin);
 
@@ -28,7 +28,7 @@ int main() {
 
     double* arr = malloc(sizeof(double) * count);
     if (arr == NULL) {
-        printf("Memory allocation failed.\n");
+        printf("Error: Memory allocation failed");
         return 1;
     }
 
@@ -43,7 +43,7 @@ int main() {
     }
 
     if (size < 7) {
-        printf("Array must have a length 7 or greater");
+        printf("Array must be of length 7 or greater");
         return 0;
     }
 
@@ -56,7 +56,7 @@ int main() {
     printf("Answer (C kernel): ");
     c_Ans = process_c(arr, size, 3);
 
-    printf("Answer (asm kernel): ");
+    printf("Answer (ASM kernel): ");
     asm_Ans = process(arr, size);
 
     free(arr);

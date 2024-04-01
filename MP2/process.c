@@ -6,7 +6,7 @@
 void process_c(double num[], int size, int iteration) {
     int start = iteration;
     int end = size - 1;
-    double result[999] = {};
+    double result[999];
     int i;
     int counter = 0;
     for (i = start; i <= end; i++) {
