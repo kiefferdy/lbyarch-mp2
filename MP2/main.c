@@ -99,7 +99,7 @@ int main() {
         printf("%.lf", Y_c[i]);
     }
     printf("\nC kernel execution time: %.5f ms\n\n", elapsed_c);
-
+    
     // -----------
     // ASM PROGRAM
     // -----------
@@ -138,7 +138,7 @@ int main() {
         printf("\nCorrectness Check: FAIL\n");
         printf("C output and ASM output are different!");
     }
-
+    
     // Free memory allocs
     // free(X);
     // free(Y_c);
