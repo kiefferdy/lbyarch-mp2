@@ -13,7 +13,7 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 # Runtime Comparison
 
 ## Debug Mode
-| Debug Mode  | 2^20 | 2^24 | 2^30 | 
+| Debug Mode  | 2<sup>20</sup> | 2sup>24</sup> | 2sup>30</sup> | 
 | --- | --- | --- | --- |
 | C | Content | Content | Content |
 | Assembly | Content | Content | Content |
@@ -23,10 +23,10 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 ### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/f87916bc-e640-435c-b9bf-b547c1141244) <br>
 
-### Vector Size 2^24 <br>
+### Vector Size 2sup>24</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/b48fe461-f1ba-4cf6-8550-253e6eea9804) <br>
 
-### Vector Size 2^30 <br>
+### Vector Size 2sup>30</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/09a52ea0-32d2-49c9-a7f1-e288be9d9e94) <br>
 
 
