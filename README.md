@@ -1,6 +1,6 @@
-### x86 Assembly and C LBYARCH Programming Project
+# x86 Assembly and C LBYARCH Programming Project
 
-## Specification:
+### Specification:
 
 Input: Scalar variable n (integer) contains the length of the vector; Vectors X and Y are both single precision float.
 
