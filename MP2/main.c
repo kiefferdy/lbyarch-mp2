@@ -24,7 +24,7 @@ static float* process_c(float* X, int size, float* Y) {
 static void print_array_10(float* arr, int size) {
     int print_size = (size < 10) ? size : 10;
     for (int i = 0; i < print_size; i++) {
-        printf("%.f ", arr[i]);
+        printf("%.2f ", arr[i]);
     }
     printf("\n");
 }
