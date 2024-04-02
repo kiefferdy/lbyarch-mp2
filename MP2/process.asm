@@ -24,23 +24,23 @@ loop:
 	xorps xmm0, xmm0
 
 	; Perform calculations
-	movsd xmm1, [rcx + (rax - 3) * 8]      ; Load num[i - 3] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + (rax - 2) * 8]      ; Load num[i - 2] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + (rax - 1) * 8]      ; Load num[i - 1] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + rax * 8]            ; Load num[i] to xmm4
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + (rax + 1) * 8]      ; Load num[i + 1] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + (rax + 2) * 8]      ; Load num[i + 2] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
-	movsd xmm1, [rcx + (rax + 3) * 8]      ; Load num[i + 3] to xmm1
-	addsd xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax - 3) * 4]      ; Load num[i - 3] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax - 2) * 4]      ; Load num[i - 2] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax - 1) * 4]      ; Load num[i - 1] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + rax * 4]            ; Load num[i] to xmm4
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax + 1) * 4]      ; Load num[i + 1] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax + 2) * 4]      ; Load num[i + 2] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
+	movss xmm1, [rcx + (rax + 3) * 4]      ; Load num[i + 3] to xmm1
+	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
 
 	; Add sum to Y array
-	movsd [r8 + r11 * 8], xmm0
+	movsd [r8 + r11 * 4], xmm0
 
 	inc r11
 

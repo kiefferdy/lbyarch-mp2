@@ -5,9 +5,9 @@
 #include <time.h>
 #include <math.h>
 
-extern void process(double*, int, double*);
+extern void process(float*, int, float*);
 
-static double* process_c(double* X, int size, double* Y) {
+static float* process_c(float* X, int size, float* Y) {
     int start_index = 3;
     int end = size - 1;
     int counter = 0;
@@ -21,15 +21,15 @@ static double* process_c(double* X, int size, double* Y) {
     return Y;
 }
 
-static void print_array_10(double* arr, int size) {
+static void print_array_10(float* arr, int size) {
     int print_size = (size < 10) ? size : 10;
     for (int i = 0; i < print_size; i++) {
-        printf("%.lf ", arr[i]);
+        printf("%.f ", arr[i]);
     }
     printf("\n");
 }
 
-static bool compare_outputs(double* Y_c, double* Y_asm, int Y_size) {
+static bool compare_outputs(float* Y_c, float* Y_asm, int Y_size) {
     for (int i = 0; i < Y_size; i++) {
         if (Y_c[i] != Y_asm[i]) {
             return false;
@@ -38,7 +38,7 @@ static bool compare_outputs(double* Y_c, double* Y_asm, int Y_size) {
     return true;
 }
 
-static void run_comparison(double* X, int vector_size, double* Y_c, double* Y_asm, int Y_size) {
+static void run_comparison(float* X, int vector_size, float* Y_c, float* Y_asm, int Y_size) {
     process_c(X, vector_size, Y_c);
     process(X, vector_size, Y_asm);
 
@@ -102,7 +102,7 @@ static void run_custom_input() {
     char input[500];
 
     // Get input
-    printf("Enter comma-separated double values: ");
+    printf("Enter comma-separated float values: ");
     fgets(input, sizeof(input), stdin);
     input[strcspn(input, "\n")] = '\0';
 
@@ -115,7 +115,7 @@ static void run_custom_input() {
     }
 
     // Parse the input string and store values in the array
-    double* X = malloc(count * sizeof(double));
+    float* X = malloc(count * sizeof(float));
     if (X == NULL) {
         printf("Error: Memory allocation failed for vector X");
         return;
@@ -125,10 +125,9 @@ static void run_custom_input() {
     char* context = NULL; // For strtok_s
     token = strtok_s(input, ",", &context);
     while (token != NULL && size < count) {
-        X[size++] = atof(token);
+        X[size++] = strtof(token, NULL);
         token = strtok_s(NULL, ",", &context);
     }
-
     if (size < 7) {
         printf("Array must be of length 7 or greater");
         return;
@@ -136,9 +135,8 @@ static void run_custom_input() {
 
     // Allocate memory for vector Y
     int Y_size = size - 6;
-    double* Y_c = malloc(Y_size * sizeof(double));
-    double* Y_asm = malloc(Y_size * sizeof(double));
-
+    float* Y_c = malloc(Y_size * sizeof(float));
+    float* Y_asm = malloc(Y_size * sizeof(float));
     if (Y_c == NULL || Y_asm == NULL) {
         printf("Error: Memory allocation failed for vector Y");
         free(X);
@@ -204,9 +202,9 @@ int main() {
         for (int i = 0; i < num_sizes; i++) {
             int vector_size = sizes[i];
             int Y_size = vector_size - 6;
-            double* X = malloc(vector_size * sizeof(double));
-            double* Y_c = malloc(Y_size * sizeof(double));
-            double* Y_asm = malloc(Y_size * sizeof(double));
+            float* X = malloc(vector_size * sizeof(float));
+            float* Y_c = malloc(Y_size * sizeof(float));
+            float* Y_asm = malloc(Y_size * sizeof(float));
 
             // Ensure memory allocation success
             if (X == NULL || Y_c == NULL || Y_asm == NULL) {
