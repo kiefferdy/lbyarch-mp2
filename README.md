@@ -15,9 +15,9 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 ## Debug Mode
 | Debug Mode  | 2<sup>20</sup> | 2<sup>24</sup> | 2<sup>30</sup> | 
 | --- | --- | --- | --- |
-| C | Content | Content | Content |
-| Assembly | Content | Content | Content |
-| Content | Content | Content | Content |
+| C | 4.7000ms | 85.0667ms | 88382.1333ms |
+| Assembly | 1.4333ms | 24.7333ms | 82178.7333ms |
+| Assembly Speed Comparison | 327.91% | 343.94% | 107.55% |
 
 # Outputs:
 ### Vector Size 2<sup>20</sup> <br>
