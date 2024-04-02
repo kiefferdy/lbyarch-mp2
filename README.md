@@ -15,3 +15,6 @@
 
 ### Vector 2^24 <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/d5efbf7b-0930-446a-9e78-0971994ba3c3) <br>
+
+### Vector 2^30 <be>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/1326421b-480d-466c-9657-ede5e8adc5ab) <br>
