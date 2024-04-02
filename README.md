@@ -38,7 +38,7 @@ Based on this testing we can see that when in release mode the assembly kernel v
 ### Vector Size 2<sup>30</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/35c932a3-de4e-494f-aac5-06dbef5d6cb3) <br>
 
-# Outputs (Debug Mode):
+# Outputs (Release Mode):
 ### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/7fb3d3db-a0b2-4dcb-bdca-c360474287b2) <br>
 ### Vector Size 2<sup>24</sup> <br>
