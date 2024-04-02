@@ -21,12 +21,12 @@ Based on our testing the assembly kernel version of the code runs 3 times faster
 | Assembly Speed Comparison | 311.36% | 326.78% | 313.57% |
 
 ## Release Mode
-Lorem ipsum dolor sit amet. Sit rerum totam hic quasi voluptas est quae numquam et saepe animi qui quia enim ea veniam dolore. Aut sequi magnam est quae galisum sed soluta sint! 33 dolorem consectetur sit dolores assumenda et similique odit et quos quia sit sequi porro qui tempore repellendus hic quisquam natus. Hic minima laborum ut deserunt impedit id assumenda tempore ut accusantium libero aut ducimus debitis et obcaecati molestiae et consequatur iusto.
+Based on this testing we can see that when in release mode the assembly kernel version runs ~20% slower than the C version. This is because in release mode C no longer has its debug features turned on and instead has its optimization features. On the other hand, the assembly code is not as well optimized as C code which leads to this speed discrepancy.
 | Release Mode  | 2<sup>20</sup> | 2<sup>24</sup> | 2<sup>30</sup> | 
 | :--- | :---: | :---: | :---: |
-| C | lorem | lorem | lorem |
-| Assembly | lorem | lorem | lorem |
-| Assembly Speed Comparison | lorem | lorem | lorem |
+| C | 1.07ms | 17.10ms | 1290.53ms |
+| Assembly | 1.33ms | 23.00ms | 1527.83ms |
+| Assembly Speed Comparison | 80.00% | 74.35% | 84.47% |
 
 # Outputs (Debug Mode):
 ### Vector Size 2<sup>20</sup> <br>
@@ -40,11 +40,11 @@ Lorem ipsum dolor sit amet. Sit rerum totam hic quasi voluptas est quae numquam 
 
 # Outputs (Debug Mode):
 ### Vector Size 2<sup>20</sup> <br>
-image <br>
+![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/7fb3d3db-a0b2-4dcb-bdca-c360474287b2) <br>
 ### Vector Size 2<sup>24</sup> <br>
-image <br>
+![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/44bc2a7a-942a-418b-b5a3-d4d55439198f) <br>
 ### Vector Size 2<sup>30</sup> <br>
-image <be>
+![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/3f73ea43-dace-4d1e-b3e7-95b3468e2362) <br>
 
 # Sample Inputs (with Correctness check)
 
