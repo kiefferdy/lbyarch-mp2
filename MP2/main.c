@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 #include <time.h>
-#include <stdbool.h>
 #include <math.h>
 
 extern void process(double*, int, double*);
@@ -42,13 +42,9 @@ static void run_comparison(double* X, int vector_size, double* Y_c, double* Y_as
     process_c(X, vector_size, Y_c);
     process(X, vector_size, Y_asm);
 
-    printf("-----Vector Size: %d-----\n", vector_size);
-
-    // Print first 10 elements of vector Y
+    printf("--------------------Vector Size: %d--------------------\n", vector_size);
     printf("First 10 elements of vector Y (C kernel): ");
     print_array_10(Y_c, Y_size);
-
-    // Print first 10 elements of vector Y
     printf("First 10 elements of vector Y (ASM kernel): ");
     print_array_10(Y_asm, Y_size);
 
@@ -63,31 +59,40 @@ static void run_comparison(double* X, int vector_size, double* Y_c, double* Y_as
     }
 
     printf("\n");
+    printf("Runtime Comparison (30 attempts):\n\n");
 
+    // C Kernel
     double total_time_c = 0.0;
-    double total_time_asm = 0.0;
-
+    printf("C Execution Times (in ms): ");
     for (int i = 0; i < 30; i++) {
         clock_t start_c = clock();
         process_c(X, vector_size, Y_c);
         clock_t end_time_c = clock();
         double elapsed_c = (end_time_c - start_c) * 1000.0 / CLOCKS_PER_SEC;
+        printf("%.1f ", elapsed_c);
         total_time_c += elapsed_c;
+    }
 
+    // ASM Kernel
+    double total_time_asm = 0.0;
+    printf("\nASM Execution Times (in ms): ");
+    for (int i = 0; i < 30; i++) {
         clock_t start_asm = clock();
         process(X, vector_size, Y_asm);
         clock_t end_time_asm = clock();
         double elapsed_asm = (end_time_asm - start_asm) * 1000.0 / CLOCKS_PER_SEC;
+        printf("%.1f ", elapsed_asm);
         total_time_asm += elapsed_asm;
     }
 
+    // Average Execution Times
     double avg_time_c = total_time_c / 30.0;
     double avg_time_asm = total_time_asm / 30.0;
-
-    printf("Runtime Comparison (30 attempts):\n");
+    printf("\n\n");
     printf("Average C Kernel Execution Time: %.5f ms\n", avg_time_c);
     printf("Average ASM Kernel Execution Time: %.5f ms\n", avg_time_asm);
 
+    // Speed Ratio
     double speed_ratio = (avg_time_c / avg_time_asm) * 100.0;
     printf("The assembly kernel is %.2f%% the speed of the C kernel.\n", speed_ratio);
 }
