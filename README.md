@@ -16,7 +16,7 @@ In this project, we compared the execution times of a C program and its equivale
 
 ### Debug Mode
 
-In Debug mode, the Assembly kernel version of the code consistently outperformed the C version by a significant margin. On average, the Assembly code ran approximately three times faster than the C code across different input sizes (2^20, 2^24, and 2^30).
+In Debug mode, the Assembly kernel version of the code consistently outperformed the C version by a significant margin. On average, the Assembly code ran approximately three times faster than the C code across different input sizes (2<sup>20</sup>, 2<sup>24</sup>, and 2<sup>30</sup>).
 
 The primary reason for this performance difference is that in Debug mode, C has debug features enabled and optimization features disabled. Debug features, such as the inclusion of debugging symbols and the absence of code optimizations, can introduce additional overhead and slow down the execution of the C code.
 
