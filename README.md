@@ -1,8 +1,6 @@
 # x86 Assembly and C LBYARCH Programming Project
 
-Group Members: 
-Tan, TImothy Joshua O. 
-Recato Dy, John Kieffer L.
+Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 
 ### Specification:
 
