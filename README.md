@@ -20,3 +20,17 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 
 ### Vector Size 2^30 <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/09a52ea0-32d2-49c9-a7f1-e288be9d9e94) <br>
+
+
+# Sample Inputs (with Correctness check)
+
+### Input: 1,2,3,4,5,6,7,8,9,10,11 <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/075c91a7-f858-4e25-9cdd-cdd86ab586fb) <br>
+
+### Input: 1,2,3,4,5,6,7,8,9,10,11 <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/66907f76-1d3e-4b65-8875-654d2ddafc57) <br>
+
+### Input: 1,2,3,4,5 (Invalid) <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/ac44932c-7521-46e5-a54d-4d2158ae4e79) <br>
+
+
