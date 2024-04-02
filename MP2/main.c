@@ -217,7 +217,7 @@ int main() {
 
             // Fill the vector with counting numbers
             for (int j = 0; j < vector_size; j++) {
-                X[j] = j + 1;
+                X[j] = j + 1.0f;
             }
 
             run_comparison(X, vector_size, Y_c, Y_asm, Y_size);

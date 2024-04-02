@@ -40,7 +40,7 @@ loop:
 	addss xmm0, xmm1                       ; xmm0 = xmm0 + xmm1
 
 	; Add sum to Y array
-	movsd [r8 + r11 * 4], xmm0
+	movss [r8 + r11 * 4], xmm0
 
 	inc r11
 
