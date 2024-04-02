@@ -7,14 +7,14 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 **Input:** Scalar variable n (integer) contains the length of the vector; Vectors X and Y are both single precision float. <br>
 **Process:** Y[i] = X[i-3] + X[1-2] + X[i-1] + X[i] + X[i+1] + X[i+2] + X[i+3] <br>
 **Example:** X -> 1,2,3,4,5,6,7,8; output Y -> 28, 35 <br>
-**Output:** Store result in vector Y. Display the result of first ten elements of vector Y for all versions of kernel (i.e. C and x86-64). <be>
+**Output:** Store result in vector Y. Display the result of the first ten elements of vector Y for all versions of kernel (i.e. C and x86-64). <be>
 
 
-# Runtime Comparison
+## Comparison of Assembly and C Execution Times
 
 In this project, we compared the execution times of a C program and its equivalent Assembly implementation in both Debug and Release modes using Visual Studio. The purpose was to analyze the performance differences between the two programming languages and the impact of compiler optimizations. The execution times below were obtained by running each kernel implementation 30 times and then averaging the results.
 
-## Debug Mode
+### Debug Mode
 
 In Debug mode, the Assembly kernel version of the code consistently outperformed the C version by a significant margin. On average, the Assembly code ran approximately three times faster than the C code across different input sizes (2^20, 2^24, and 2^30).
 
@@ -28,7 +28,7 @@ In contrast, Assembly code is a low-level programming language that provides dir
 | Assembly Average Time | 1.47ms | 22.90ms | 1707.53ms |
 | Assembly Code Speed (vs. C) | 311.36% | 326.78% | 313.57% |
 
-## Release Mode
+### Release Mode
 
 In Release mode, the performance comparison yielded different results. The C version of the code outperformed the Assembly version by approximately 20% across all input sizes.
 
@@ -45,7 +45,7 @@ In addition, the performance of Assembly code can vary depending on the specific
 | Assembly Code Speed (vs. C) | 80.00% | 74.35% | 84.47% |
 
 
-# Outputs (Debug Mode):
+## Outputs (Debug Mode):
 ### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/4c233b3b-a7c3-4ee6-9836-0a70e6e8cdf9) <br>
 
@@ -56,7 +56,7 @@ In addition, the performance of Assembly code can vary depending on the specific
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/35c932a3-de4e-494f-aac5-06dbef5d6cb3) <be>
 
 
-# Outputs (Release Mode):
+## Outputs (Release Mode):
 ### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/7fb3d3db-a0b2-4dcb-bdca-c360474287b2) <br>
 ### Vector Size 2<sup>24</sup> <br>
@@ -65,7 +65,7 @@ In addition, the performance of Assembly code can vary depending on the specific
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/3f73ea43-dace-4d1e-b3e7-95b3468e2362) <be>
 
 
-# Sample Inputs (with Correctness check)
+## Sample Inputs (with Correctness check)
 
 ### Input: 1,2,3,4,5,6,7,8,9,10,11 <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/b01fe6ec-db4f-45b7-8b09-34d2551ee5b5) <br>
@@ -75,5 +75,3 @@ In addition, the performance of Assembly code can vary depending on the specific
 
 ### Input: 1,2,3,4,5 (Invalid) <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp2/assets/98691592/e52f8461-36bf-4c2f-967d-e031878a4fba) <br>
-
-
