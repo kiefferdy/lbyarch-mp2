@@ -21,6 +21,12 @@ Based on our testing the assembly kernel version of the code runs 3 times faster
 | Assembly Speed Comparison | 327.91% | 343.94% | 107.55% |
 
 ## Release Mode
+Lorem ipsum dolor sit amet. Sit rerum totam hic quasi voluptas est quae numquam et saepe animi qui quia enim ea veniam dolore. Aut sequi magnam est quae galisum sed soluta sint! 33 dolorem consectetur sit dolores assumenda et similique odit et quos quia sit sequi porro qui tempore repellendus hic quisquam natus. Hic minima laborum ut deserunt impedit id assumenda tempore ut accusantium libero aut ducimus debitis et obcaecati molestiae et consequatur iusto.
+| Release Mode  | 2<sup>20</sup> | 2<sup>24</sup> | 2<sup>30</sup> | 
+| :--- | :---: | :---: | :---: |
+| C | lorem | lorem | lorem |
+| Assembly | lorem | lorem | lorem |
+| Assembly Speed Comparison | lorem | lorem | lorem |
 
 # Outputs (Debug Mode):
 ### Vector Size 2<sup>20</sup> <br>
