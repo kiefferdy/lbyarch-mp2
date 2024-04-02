@@ -39,10 +39,9 @@ static bool compare_outputs(float* Y_c, float* Y_asm, int Y_size) {
 }
 
 static void run_comparison(float* X, int vector_size, float* Y_c, float* Y_asm, int Y_size) {
+    printf("--------------------Vector Size: %d--------------------\n", vector_size);
     process_c(X, vector_size, Y_c);
     process(X, vector_size, Y_asm);
-
-    printf("--------------------Vector Size: %d--------------------\n", vector_size);
     printf("First 10 elements of vector Y (C kernel): ");
     print_array_10(Y_c, Y_size);
     printf("First 10 elements of vector Y (ASM kernel): ");
