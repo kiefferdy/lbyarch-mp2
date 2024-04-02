@@ -11,8 +11,16 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 
 
 # Runtime Comparison
+
 ## Debug Mode
-### Vector Size 2^20 <br>
+| Debug Mode  | 2^20 | 2^24 | 2^30 | 
+| --- | --- | --- | --- |
+| C | Content | Content | Content |
+| Assembly | Content | Content | Content |
+| Content | Content | Content | Content |
+
+# Outputs:
+### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/f87916bc-e640-435c-b9bf-b547c1141244) <br>
 
 ### Vector Size 2^24 <br>
