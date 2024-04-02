@@ -20,7 +20,9 @@ Based on our testing the assembly kernel version of the code runs 3 times faster
 | Assembly | 1.4333ms | 24.7333ms | 82178.7333ms |
 | Assembly Speed Comparison | 327.91% | 343.94% | 107.55% |
 
-# Outputs:
+## Release Mode
+
+# Outputs (Debug Mode):
 ### Vector Size 2<sup>20</sup> <br>
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/f87916bc-e640-435c-b9bf-b547c1141244) <br>
 
@@ -28,8 +30,15 @@ Based on our testing the assembly kernel version of the code runs 3 times faster
 ![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/b48fe461-f1ba-4cf6-8550-253e6eea9804) <br>
 
 ### Vector Size 2<sup>30</sup> <br>
-![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/09a52ea0-32d2-49c9-a7f1-e288be9d9e94) <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/09a52ea0-32d2-49c9-a7f1-e288be9d9e94) <be>
 
+# Outputs (Debug Mode):
+### Vector Size 2<sup>20</sup> <be>
+image <br>
+### Vector Size 2<sup>24</sup> <be>
+image <br>
+### Vector Size 2<sup>30</sup> <br>
+image <be>
 
 # Sample Inputs (with Correctness check)
 
