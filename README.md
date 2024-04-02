@@ -15,10 +15,10 @@ Recato Dy, John Kieffer L.
 # Runtime Comparison
 ## Debug Mode
 ### Vector 2^20 <br>
-![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/85b13245-e386-4cc6-a6ec-2abf155bd17f) <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/f87916bc-e640-435c-b9bf-b547c1141244) <br>
 
 ### Vector 2^24 <br>
-![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/d5efbf7b-0930-446a-9e78-0971994ba3c3) <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/b48fe461-f1ba-4cf6-8550-253e6eea9804) <br>
 
 ### Vector 2^30 <be>
-![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/1326421b-480d-466c-9657-ede5e8adc5ab) <br>
+![image](https://github.com/kiefferdy/lbyarch-mp/assets/98691592/09a52ea0-32d2-49c9-a7f1-e288be9d9e94) <br>
