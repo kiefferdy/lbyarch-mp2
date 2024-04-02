@@ -13,6 +13,7 @@ Group Members: Tan, Timothy Joshua O. & Recato Dy, John Kieffer L.
 # Runtime Comparison
 
 ## Debug Mode
+Based on our testing the assembly kernel version of the code runs 3 times faster than the C version when in debug mode. This is because in debug mode C has debug features turned on and optimization features turned off. In contrast, the assembly code has no debug features and is already optimized because it is a low-level programming language. <br>  
 | Debug Mode  | 2<sup>20</sup> | 2<sup>24</sup> | 2<sup>30</sup> | 
 | :--- | :---: | :---: | :---: |
 | C | 4.7000ms | 85.0667ms | 88382.1333ms |
